@@ -37,7 +37,7 @@ namespace AirlineReservationSystem.Repositories
             }
         }
 
-        public Reservation CancelTicket(int TicketNo)
+        public List<Reservation> CancelTicket(int TicketNo)
         {
             DB.Reservations.Where(x => x.TicketNo == TicketNo)
                             .ToList()
@@ -45,7 +45,7 @@ namespace AirlineReservationSystem.Repositories
 
             DB.SaveChanges();
 
-            return DB.Reservations.Where(x => x.TicketNo == TicketNo).SingleOrDefault();
+            return DB.Reservations.ToList();
         }
 
         public List<Reservation> ViewTickets(string PassengerName)

@@ -28,7 +28,7 @@ namespace AirlineReservationSystem.Controllers
 
         [HttpPut]
         [Route("{TicketNo}")]
-        public Reservation CancelTicket(int TicketNo)
+        public List<Reservation> CancelTicket(int TicketNo)
         {
             return reservationsRepository.CancelTicket(TicketNo);
         }
