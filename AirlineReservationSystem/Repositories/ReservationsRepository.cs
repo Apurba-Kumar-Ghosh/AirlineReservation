@@ -10,7 +10,7 @@ namespace AirlineReservationSystem.Repositories
     {
         private readonly AirlineDBContext DB = new AirlineDBContext();
 
-        public string BookTicket(string FlightID, DateTime JourneyDate, string PassengerName, int ContactNo, string Email, int NoOftickets)
+        public string BookTicket(string FlightID, DateTime JourneyDate, string PassengerName, long ContactNo, string Email, int NoOftickets)
         {
             var BookingsMade = DB.Reservations.Where(x => x.FlightID == FlightID && x.JourneyDate == JourneyDate && x.Status == "Booked").Select(x => x.NoOfTickets).Sum();
             var NoOfSeats = DB.Flights.Where(x => x.FlightID == FlightID).Select(x => x.NoOfSeats).ToList()[0];
@@ -48,10 +48,9 @@ namespace AirlineReservationSystem.Repositories
             return DB.Reservations.Where(x => x.TicketNo == TicketNo).SingleOrDefault();
         }
 
-        public Reservation ViewTickets(string PassengerName)
+        public List<Reservation> ViewTickets(string PassengerName)
         {
-            return DB.Reservations.Where(x => x.PassengerName == PassengerName)
-                                    .SingleOrDefault();
+            return DB.Reservations.Where(x => x.PassengerName == PassengerName).ToList();
         }
     }
 }

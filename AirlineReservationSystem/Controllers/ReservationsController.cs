@@ -21,9 +21,9 @@ namespace AirlineReservationSystem.Controllers
         }
 
         [HttpPost]
-        public string BookTicket(string FlightID, DateTime JourneyDate, string PassengerName, int ContactNo, string Email, int NoOftickets)
+        public string BookTicket(Reservation ticket)
         {
-            return reservationsRepository.BookTicket(FlightID,  JourneyDate,  PassengerName,  ContactNo,  Email,  NoOftickets);
+            return reservationsRepository.BookTicket(ticket.FlightID,  ticket.JourneyDate,  ticket.PassengerName,  ticket.ContactNo,  ticket.Email,  ticket.NoOfTickets);
         }
 
         [HttpPut]
@@ -34,7 +34,7 @@ namespace AirlineReservationSystem.Controllers
         }
         
         [HttpGet]
-        public Reservation ViewTicketStatus(string PassengerName)
+        public List<Reservation> ViewTickets(string PassengerName)
         {
             return reservationsRepository.ViewTickets(PassengerName);
         }
