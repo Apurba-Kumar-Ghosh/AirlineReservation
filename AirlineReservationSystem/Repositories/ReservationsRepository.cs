@@ -47,7 +47,36 @@ namespace AirlineReservationSystem.Repositories
 
             return DB.Reservations.ToList();
         }
+        public float GenerateRevenue(string FlightID)
+        {
+            var TotalRevenue = DB.Reservations.Where(x => x.FlightID == FlightID
+            && x.Status == "Booked").Sum(s => s.TotalFare);
 
+            return TotalRevenue;
+
+
+        }
+
+        public float GenerateRevenue(string FlightID, DateTime RevenueStartDate, DateTime RevenueEndDate)
+        {
+            var t = DB.Reservations.Where(x => x.FlightID == FlightID && x.Status == "Booked" && (x.JourneyDate >= RevenueStartDate && x.JourneyDate <= RevenueEndDate)).Sum(s => s.TotalFare);
+            return t;
+        }
+
+        public float TotalRevenueOfAirLine()
+        {
+            var t = DB.Reservations.Where(x => x.Status == "Booked").Sum(s => s.TotalFare);
+
+            return t;
+
+        }
+
+        public float TotalRevenueOfAirLine(DateTime RevenueStartDate, DateTime RevenueEndDate)
+        {
+            var t = DB.Reservations.Where(x => x.Status == "Booked" && (x.JourneyDate >= RevenueStartDate && x.JourneyDate <= RevenueEndDate)).Sum(s => s.TotalFare);
+
+            return t;
+        }
         public List<Reservation> ViewTickets(string PassengerName)
         {
             return DB.Reservations.Where(x => x.PassengerName == PassengerName).ToList();

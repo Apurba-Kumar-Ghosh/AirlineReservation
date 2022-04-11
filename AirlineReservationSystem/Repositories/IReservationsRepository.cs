@@ -11,5 +11,9 @@ namespace AirlineReservationSystem.Repositories
         string BookTicket(string FlightID, DateTime JourneyDate, string PassengerName, long ContactNo, string Email, int NoOftickets);
         List<Reservation> CancelTicket(int TicketNo);
         List<Reservation> ViewTickets(string PassengerName);
+        float GenerateRevenue(string FlightID);
+        float TotalRevenueOfAirLine();
+        float GenerateRevenue(string FlightID, DateTime RevenueStartDate, DateTime RevenueEndDate);
+        float TotalRevenueOfAirLine(DateTime RevenueStartDate, DateTime RevenueEndDate);
     }
 }
